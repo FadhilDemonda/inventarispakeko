@@ -28,9 +28,10 @@ const authService = {
       throw err;
     }
 
+    const secret = process.env.JWT_SECRET || 'inven_auth_jwt_secure_token_secret_key';
     const token = jwt.sign(
       { id: user.id, email: user.email, nama: user.nama },
-      process.env.JWT_SECRET,
+      secret,
       { expiresIn: '1d' }
     );
 

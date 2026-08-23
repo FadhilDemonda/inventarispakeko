@@ -23,7 +23,8 @@ const authMiddleware = (req, res, next) => {
       });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const secret = process.env.JWT_SECRET || 'inven_auth_jwt_secure_token_secret_key';
+    const decoded = jwt.verify(token, secret);
     req.user = decoded;
     next();
   } catch (error) {

@@ -1,13 +1,13 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 
-const isProduction = process.env.NODE_ENV === 'production';
+const dbUrl = process.env.DATABASE_URL || '';
+const isRemote = dbUrl && !dbUrl.includes('localhost') && !dbUrl.includes('127.0.0.1');
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/inventaris_kantor',
-  ssl: process.env.DATABASE_URL && process.env.DATABASE_URL.includes('supabase.co') 
-    ? { rejectUnauthorized: false } 
-    : false,
+  connectionString: dbUrl || 'postgresql://postgres:postgres@localhost:5432/inventaris_kantor',
+  ssl: isRemote ? { rejectUnauthorized: false } : false,
+  connectionTimeoutMillis: 10000,
 });
 
 pool.on('error', (err) => {
@@ -21,7 +21,6 @@ const query = (text, params) => pool.query(text, params);
 
 /**
  * Transaction helper for atomic operations (ACID)
- * Sesuai Development Rules §2.3
  */
 const withTransaction = async (callback) => {
   const client = await pool.connect();

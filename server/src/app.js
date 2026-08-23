@@ -9,9 +9,9 @@ const { pool } = require('./config/db');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Enable CORS with Credentials (for httpOnly cookies)
+// Enable CORS with Credentials
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: (origin, callback) => callback(null, true),
   credentials: true
 }));
 

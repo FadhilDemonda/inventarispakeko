@@ -34,25 +34,27 @@ app.use('/api', routes);
 // Centralized Error Handler (Development Rules §2.5)
 app.use(errorHandler);
 
-// Test DB Connection & Start Server
-const startServer = async () => {
-  try {
-    const client = await pool.connect();
-    console.log('✅ Terhubung ke database PostgreSQL.');
-    client.release();
+// Start Server only in standalone mode
+if (require.main === module) {
+  const startServer = async () => {
+    try {
+      const client = await pool.connect();
+      console.log('✅ Terhubung ke database PostgreSQL.');
+      client.release();
 
-    app.listen(PORT, () => {
-      console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
-    });
-  } catch (err) {
-    console.error('❌ Gagal terhubung ke database:', err.message);
-    console.log('⚠️ Server tetap berjalan untuk menerima request...');
-    app.listen(PORT, () => {
-      console.log(`🚀 Server berjalan di http://localhost:${PORT} (Database pending)`);
-    });
-  }
-};
+      app.listen(PORT, () => {
+        console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
+      });
+    } catch (err) {
+      console.error('❌ Gagal terhubung ke database:', err.message);
+      console.log('⚠️ Server tetap berjalan untuk menerima request...');
+      app.listen(PORT, () => {
+        console.log(`🚀 Server berjalan di http://localhost:${PORT} (Database pending)`);
+      });
+    }
+  };
 
-startServer();
+  startServer();
+}
 
 module.exports = app;

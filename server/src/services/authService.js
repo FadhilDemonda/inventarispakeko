@@ -30,7 +30,7 @@ const authService = {
 
     const token = jwt.sign(
       { id: user.id, email: user.email, nama: user.nama },
-      process.env.JWT_SECRET || 'super_secret_inventaris_jwt_key_2026_kantor',
+      process.env.JWT_SECRET,
       { expiresIn: '1d' }
     );
 

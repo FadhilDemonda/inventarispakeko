@@ -28,8 +28,9 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// API Routes
+// API Routes (mendukung akses lokal /api dan serverless function Netlify /)
 app.use('/api', routes);
+app.use('/', routes);
 
 // Centralized Error Handler (Development Rules §2.5)
 app.use(errorHandler);

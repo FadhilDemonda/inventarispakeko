@@ -1,8 +1,7 @@
 [build]
-  base = "client"
-  publish = "dist"
-  command = "npm run build"
-  functions = "../netlify/functions"
+  command = "npm run build --prefix client"
+  publish = "client/dist"
+  functions = "netlify/functions"
 
 [functions]
   node_bundler = "esbuild"

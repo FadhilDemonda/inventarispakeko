@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Package, 
-  Car, 
-  ArrowLeftRight, 
-  History, 
+import {
+  LayoutDashboard,
+  Package,
+  Car,
+  ArrowLeftRight,
+  History,
   FileText,
   Boxes,
   X
@@ -25,22 +25,22 @@ export const Sidebar = ({ isOpen, onClose }) => {
     <>
       {/* Mobile Backdrop */}
       {isOpen && (
-        <div 
+        <div
           onClick={onClose}
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden transition-opacity"
         />
       )}
 
-      {/* Sidebar Container (Responsive: Drawer on mobile, static on desktop) */}
+      {/* Sidebar Container (Responsive: Drawer on mobile, sticky full-height on desktop) */}
       <aside
-        className={`fixed md:sticky top-0 left-0 h-screen w-64 bg-[#0D530E] text-[#FBF5DD] flex flex-col shrink-0 z-50 border-r border-[#1b4317] shadow-2xl md:shadow-xl transition-transform duration-300 ease-in-out ${
+        className={`fixed md:sticky inset-y-0 top-0 left-0 h-screen min-h-screen w-64 bg-[#0D530E] text-[#FBF5DD] flex flex-col justify-between shrink-0 z-50 border-r border-[#1b4317] shadow-2xl md:shadow-xl transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
         {/* Brand Header */}
-        <div className="h-16 flex items-center justify-between px-6 border-b border-emerald-900/50 bg-[#083709]/40">
+        <div className="h-16 shrink-0 flex items-center justify-between px-6 border-b border-[#1b4317] bg-[#0D530E]">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#306D29] border border-[#E7E1B1]/30 flex items-center justify-center text-[#FBF5DD] shadow-md shadow-emerald-950/40">
+            <div className="w-9 h-9 rounded-xl bg-[#306D29] border border-[#E7E1B1]/30 flex items-center justify-center text-[#FBF5DD] shadow-md shadow-[#083709]/40">
               <Boxes className="w-5 h-5" />
             </div>
             <div>
@@ -90,7 +90,7 @@ export const Sidebar = ({ isOpen, onClose }) => {
         </div>
 
         {/* Footer Info */}
-        <div className="p-4 border-t border-emerald-900/40 text-xs text-[#E7E1B1]/80 flex items-center justify-between bg-[#083709]/30">
+        <div className="shrink-0 p-4 border-t border-[#1b4317] text-xs text-[#E7E1B1]/80 flex items-center justify-between bg-[#0D530E]">
           <span>Fase 1: Local / Cloud</span>
           <span className="px-2 py-0.5 rounded bg-[#306D29] text-[#FBF5DD] font-mono text-[10px] font-bold">v1.0</span>
         </div>

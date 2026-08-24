@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "node --watch src/app.js",
-    "migrate": "node src/migrations/migrate.js"
+    "migrate": "node src/migrations/migrate.js",
+    "seed:october": "node src/migrations/seedOctober.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
